@@ -12,7 +12,7 @@ public interface CityDAO {
 
     CityModel findById(Integer id);
 
-    CityModel saveNewCity(CityModel cityModel);
+    void saveNewCity(int id, String name, Double latitude, Double longitude);
 
 
 }
