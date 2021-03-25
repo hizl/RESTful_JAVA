@@ -41,7 +41,7 @@ public class CityResources {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") int id) {
         CityModel getByID = CityDAOImpl.getInstance().findById(id);
-        if (getByID == null){
+        if (getByID != null){
             return Response.ok(getByID, MediaType.APPLICATION_JSON).build();
         }else {
         return Response.status(Response.Status.NOT_FOUND).build();

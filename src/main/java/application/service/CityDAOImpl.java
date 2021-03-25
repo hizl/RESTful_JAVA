@@ -98,7 +98,7 @@ public class CityDAOImpl implements CityDAO {
 
     @Override
     public CityModel findById(Integer id) {
-        final String selectQuery = "SELECT Name, Latitude,Longitude FROM City WHERE ID=?";
+        final String selectQuery = "SELECT id, Name, Latitude,Longitude FROM City WHERE ID=" + id;
         CityModel cityModel = new CityModel();
         try {
 
@@ -118,10 +118,12 @@ public class CityDAOImpl implements CityDAO {
 
         try {
             while (rs.next()) {
+
+
                 cityModel.setId(id);
-                cityModel.setName(rs.getString(1));
-                cityModel.setLatitude(rs.getDouble(2));
-                cityModel.setLongitude(rs.getDouble(3));
+                cityModel.setName(rs.getString(2));
+                cityModel.setLatitude(rs.getDouble(3));
+                cityModel.setLongitude(rs.getDouble(4));
 
             }
 
@@ -146,8 +148,33 @@ public class CityDAOImpl implements CityDAO {
 
 
     @Override
-    public CityModel saveNewCity(CityModel cityModel) {
-        return null;
+    public void saveNewCity(int id, String name, Double latitude, Double longitude) {
+        String insertQuery = "update City set Name=?, Latitude=?, Longitude=? where id=?";
+
+
+        try {
+
+            con = DBConnector.getConnection();
+            pst = con.prepareStatement(insertQuery);
+
+            pst.setInt(1, id);
+            pst.setString(2, name);
+            pst.setDouble(3, latitude);
+            pst.setDouble(4, longitude);
+
+
+            pst.executeUpdate();
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                DBConnector.closeConnectionAll(con, pst, null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 
