@@ -1,8 +1,9 @@
-package application.test;
+package application.testDAO;
 
 import application.model.CityModel;
 import application.service.CityDAO;
 import application.service.CityDAOImpl;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class TestingRawResponseFromDatabase {
         saveNewCity(44,"Fool",-444D,444.55);
     }
 
+    @Test
     public static void findAllCities() {
         CityDAO FIND = new CityDAOImpl();
         List<CityModel> findAll = FIND.findAllCity();

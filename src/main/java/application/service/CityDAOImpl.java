@@ -149,8 +149,9 @@ public class CityDAOImpl implements CityDAO {
 
     @Override
     public void saveNewCity(int id, String name, Double latitude, Double longitude) {
-        String insertQuery = "update City set Name=?, Latitude=?, Longitude=? where id=?";
 
+        String insertQuery = "Insert into City (id,Name,Latitude,Longitude) "
+                + "values (?,?,?,?)";
 
         try {
 
